@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>CA1 Enterprise Performance Architecture</h1>
+    <h2>In this html file I will explain to you how to use docker and take you through the steps I took in order to complete this CA.</h2>
+
+    <h3>How to use Docker</h3>
+    <p><b>Docker Basics:</b> <br>
+    <b>1.</b> To create a Dockerfile on your command line use this command: <br>
+    'nano Dockerfile' <br> You can type your commands in this editor for your Dockerfile
+    <br></br>
+    <b>2.</b> The main commands we will use in our Docker files are FROM, COPY, RUN, CMD:
+    <br> <b>FROM:</b> Every dockerfile starts with this command, this is where you specify the base image.
+    <br> For example FROM python:3 <br></br>
+    <b>COPY:</b> This will copy the file to the container and if it doesn't exist it will create it.
+    <br> <b>RUN:</b> This command is used to run any shell commands or scripts <br>
+    <b>CMD:</b> We can pass agruments into this command.
+    <br></br> <b>3.</b> You would then create the script you want to execute. <br></br>
+    <b>4.</b> To build our dockerfile we can use 'docker build .'. This builds the image and
+    assigns it an Image ID and then you run the image.</p>
+
+    <p><b>Docker Pull:</b> <br>
+    <b>1.</b> You can download or pull container image using 'docker pull [image]'</p>
+
+    <p> <p><b>Running http containers as servers:</b> <br>
+    <b>1.</b> In this example we will display a html file on a http server. <br>
+    When you create your dockerfile for example like this: <br>
+    FROM python:3 <br> COPY CA1.html /<br> CMD python3 -m http.server 8080<br></br>
+    <b>2.</b> We can build it using 'docker build .', take the image ID and then using the docker<br>
+    run command we can access the http server.<br></br> docker run -p 8080:8080 '(Image ID)'
+    <br></br> <b>3.</b> Now that the image is listening on port 8080 and we can preview our webpage in our browser.</p>
+
+    <p> <b>Docker push:</b> <br> You can push a container to a cloud repository <br></br>
+    <b>1.</b> Firstly, we tag the image with our repository using: <br>
+    docker tag [image id] eu.gcr.io/<Project repo ID> <br></br>
+    <b>2.</b> Then push it using: <br>
+    docker push eu.gcr.io/<Project repo ID></p>
+
+    <p>Here are the labsheets:<br>
+    <a href="https://elearning-ta.tudublin.ie/mod/page/view.php?id=402047">Docker</a><br>
+    <a href="https://elearning-ta.tudublin.ie/mod/page/view.php?id=219953">Docker Push</a><br>
+    <a href="https://elearning-ta.tudublin.ie/mod/page/view.php?id=218727">Docker Pull</a></p>
+    
+
+    <h3>Steps taken to complete this CA:</h3>
+    <p><b>1.</b> Firstly, using the google cloud console command line, <br>I created a directory called CA1 using the command 'mkdir CA1'. 
+    <br>  This is the directory that I will use for this CA.</p>
+
+    <p><b>2.</b> Next, I created a Dockerfile using nano 'nano Dockerfile'.
+    <br> I used the lab sheet from Week 4 on docker, along with the CA guidelines to figure out what to put in my Dockerfile. 
+    <br>The Dockerfile contained the following code: </p>
+    <p><b>FROM python:3<br> COPY CA1.html /<br> CMD python3 -m http.server 8080</b><br>
+    You can find more information about the <b>CMD</b> line of code at this <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server">link</a>.</p>
+   
+    <p><b>3.</b> If I tried to build this Dockerfile, I would get an error, as I have not created CA1.html yet.
+    <br>So this was my next step. <br> I used <a href="https://code.visualstudio.com/">visual studio code</a> to write the code for my html file and <a href="https://www.w3schools.com/html/">w3schools.com</a> to help me design it.
+    <br> Then, on the google cloud console I created the html file using 'nano CA1.html' and copied and pasted the code from Visual Studio into it. </p>
+    
+    <p><b>4.</b> After I completed the html file I went ahead and build the dockefile using 'docker build .'<br>
+    This will build a docker image which has an id.<br>To list the docker images and their IDs we can run the command 'docker images'.<br>
+    I then used this command 'docker run -p 8080:8080 (Image ID)'. <br>This runs the image on port 8080 which we can view in our browser. <br>
+    Lastly, on the google cloud command line I clicked the web preview button and then hit preview on port 8080.<br>
+    This displays the html file I created in the browser.</p>
+
+    <p><b>5. </b> Lastly, we can push to our repository using the following commands: <br>
+    git add . <br>
+    git commit -m "comment" <br>
+    git push</p>
+</body>
+</html>
